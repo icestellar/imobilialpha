@@ -1,0 +1,55 @@
+<ion-content class="swiper-no-swiping">
+  <div class="container top">
+      <div class="ion-text-center">
+          <span><b>Imobiliariα</b></span>
+        </div>
+          <ion-segment (ionChange)="segmentChanged($event)" value="login" color="principal"  (ionSlideDidChange)="slideChanged()">
+          <ion-segment-button value="login">
+            <ion-label>Log-in</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="register">
+            <ion-label>Cadastrar-se</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+  </div>
+  <div class="fundo">
+  <ion-slides>
+    <ion-slide>
+      <div class="slide-inner ion-padding">
+      <span>Login</span>
+      <ion-item class="ion-margin-top" lines="none">
+        <ion-input type="email" placeholder="E-mail" [(ngModel)]="userLogin.email"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-top" lines="none">
+        <ion-input type="password" placeholder="Senha" [(ngModel)]="userLogin.password"></ion-input>
+      </ion-item>
+      <ion-button class="ion-margin-top" color="principal" expand="block" (click)="login()">
+        Entrar
+      </ion-button>
+    </div>
+    </ion-slide>
+    <ion-slide>
+        <div class="slide-inner ion-padding">
+        <span>Cadastre-se</span>
+        <ion-item class="ion-margin-top" lines="none">
+            <ion-input type="name" placeholder="Nome"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="email" placeholder="E-mail" [(ngModel)]="userRegister.email"></ion-input>
+        </ion-item>
+  
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="password" placeholder="Senha" [(ngModel)]="userRegister.password"></ion-input>
+        </ion-item>
+        <ion-button class="ion-margin-top" color="principal" expand="block" (click)="register()">
+          Cadastrar
+        </ion-button>
+      </div>
+      </ion-slide>
+  </ion-slides>
+</div>
+<div class="container bottom rodape">
+</div>
+</ion-content>

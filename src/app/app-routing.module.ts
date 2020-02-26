@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'details/:id',
     loadChildren: () => import('./pages/details/details.module').then( m => m.DetailsPageModule),  canActivate: [AuthGuard]
+  },
+  {
+    path: 'apartment',
+    loadChildren: () => import('./pages/apartment/apartment.module').then( m => m.ApartmentPageModule)
   }
 ];
 

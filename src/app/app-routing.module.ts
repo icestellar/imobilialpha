@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'apartment',
     loadChildren: () => import('./pages/apartment/apartment.module').then( m => m.ApartmentPageModule)
+  },
+  {
+    path: 'geo',
+    loadChildren: () => import('./pages/geo/geo.module').then( m => m.GeoPageModule)
   }
 ];
 

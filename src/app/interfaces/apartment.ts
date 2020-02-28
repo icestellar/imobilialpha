@@ -5,4 +5,6 @@ export interface Apartment {
     price?: string;
     createdAt?: number;
     userId?: string;
+    size?: number;
+    endereco?: string;
 }

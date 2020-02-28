@@ -32,12 +32,15 @@
         </ion-avatar>
 
         <ion-label>
+          <!--Colocar foto :) -->
           {{ apartment.name }}
           <p>{{ apartment.description }}</p>
+          <p>{{ apartment.endereco}}</p>
           <p>{{ apartment.createdAt | date: 'short' }}</p>
+          <p>{{ apartment.size}} m²</p>
         </ion-label>
 
-        <ion-note color="primary" slot="end" *ngIf="apartment.price">{{ apartment.price | currency: 'BRL' }}</ion-note>
+        <ion-note color="primary" slot="end" *ngIf="apartment.price">{{ apartment.price | currency: 'BRL' }} p/mês</ion-note>
       </ion-item>
 
       <ion-item-options side="end">

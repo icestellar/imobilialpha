@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Map, tileLayer, marker } from 'leaflet';
+declare let L;
 
 @Component({
   selector: 'app-geo',

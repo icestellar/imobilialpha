@@ -14,7 +14,7 @@
       <ion-input type="text" [(ngModel)]="apartment.name" placeholder="Nome"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="apartment.endereco" placeholder="Descrição"></ion-input>
+      <ion-input type="text" [(ngModel)]="apartment.cpf" placeholder="Endereço"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="text" [(ngModel)]="apartment.description" placeholder="Descrição"></ion-input>
@@ -26,6 +26,9 @@
       <ion-input type="text" [(ngModel)]="apartment.size" placeholder="Tamanho (em m²)"></ion-input>
     </ion-item>
   </ion-list>
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="apartment.picture" placeholder="Foto"></ion-input>
+  </ion-item>
 </ion-content>
 
 <ion-footer>

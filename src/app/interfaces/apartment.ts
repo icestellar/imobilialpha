@@ -7,4 +7,5 @@ export interface Apartment {
     userId?: string;
     size?: number;
     endereco?: string;
+    picture?: string;
 }

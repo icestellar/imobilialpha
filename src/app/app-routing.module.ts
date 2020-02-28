@@ -23,11 +23,23 @@ const routes: Routes = [
   },
   {
     path: 'apartment',
-    loadChildren: () => import('./pages/apartment/apartment.module').then( m => m.ApartmentPageModule)
+    loadChildren: () => import('./pages/apartment/apartment.module').then( m => m.ApartmentPageModule), canActivate: [AuthGuard]
   },
   {
     path: 'geo',
-    loadChildren: () => import('./pages/geo/geo.module').then( m => m.GeoPageModule)
+    loadChildren: () => import('./pages/geo/geo.module').then( m => m.GeoPageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'employee',
+    loadChildren: () => import('./pages/employee/employee.module').then( m => m.EmployeePageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'epldetails',
+    loadChildren: () => import('./pages/epldetails/epldetails.module').then( m => m.EpldetailsPageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'epldetails/:id',
+    loadChildren: () => import('./pages/epldetails/epldetails.module').then( m => m.EpldetailsPageModule), canActivate: [AuthGuard]
   }
 ];
 

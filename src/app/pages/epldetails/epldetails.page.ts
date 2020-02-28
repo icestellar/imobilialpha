@@ -1,71 +1,71 @@
 import { Component, OnInit } from '@angular/core';
-import { ApartmentService } from 'src/app/services/apartment.service';
+import { EmployeeService } from 'src/app/services/employee.service';
 import { ActivatedRoute } from '@angular/router';
-import { Apartment } from 'src/app/interfaces/apartment';
+import { Employee } from 'src/app/interfaces/employee';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.page.html',
-  styleUrls: ['./details.page.scss'],
+  selector: 'app-epldetails',
+  templateUrl: './epldetails.page.html',
+  styleUrls: ['./epldetails.page.scss'],
 })
-export class DetailsPage implements OnInit {
-  private apartmentId: string = null;
-  public apartment: Apartment = {};
+export class EpldetailsPage implements OnInit {
+  private employeeId: string = null;
+  public employee: Employee = {};
   private loading: any;
-  private apartmentSubscription: Subscription;
+  private employeeSubscription: Subscription;
 
   constructor(
-    private apartmentService: ApartmentService,
+    private employeeService: EmployeeService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private toastCtrl: ToastController
   ) {
-    this.apartmentId = this.activatedRoute.snapshot.params['id'];
+    this.employeeId = this.activatedRoute.snapshot.params['id'];
 
-    if (this.apartmentId) this.loadApartment();
+    if (this.employeeId) this.loadEmployee();
   }
 
   ngOnInit() { }
 
   ngOnDestroy() {
-    if (this.apartmentSubscription) this.apartmentSubscription.unsubscribe();
+    if (this.employeeSubscription) this.employeeSubscription.unsubscribe();
   }
 
-  loadApartment() {
-    this.apartmentSubscription = this.apartmentService.getApartment(this.apartmentId).subscribe(data => {
-      this.apartment = data;
+  loadEmployee() {
+    this.employeeSubscription = this.employeeService.getEmployee(this.employeeId).subscribe(data => {
+      this.employee = data;
     });
   }
 
-  async saveApartment() {
+  async saveEmployee() {
     await this.presentLoading();
 
-    this.apartment.userId = this.authService.getAuth().currentUser.uid;
+    this.employee.userId = this.authService.getAuth().currentUser.uid;
 
-    if (this.apartmentId) {
+    if (this.employeeId) {
       try {
-        await this.apartmentService.updateApartment(this.apartmentId, this.apartment);
+        await this.employeeService.updateEmployee(this.employeeId, this.employee);
         await this.loading.dismiss();
 
-        this.navCtrl.navigateBack('/apartment');
+        this.navCtrl.navigateBack('/employee');
       } catch (error) {
         
         this.presentToast('Erro ao tentar salvar');
         this.loading.dismiss();
       }
     } else {
-      this.apartment.createdAt = new Date().getTime();
+      this.employee.createdAt = new Date().getTime();
 
       try {
-        await this.apartmentService.addApartment(this.apartment);
+        await this.employeeService.addEmployee(this.employee);
         await this.loading.dismiss();
 
-        this.navCtrl.navigateBack('/apartment');
+        this.navCtrl.navigateBack('/employee');
       } catch (error) {
         this.presentToast('Erro ao tentar salvar');
         this.loading.dismiss();

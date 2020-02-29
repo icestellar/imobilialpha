@@ -40,6 +40,10 @@ const routes: Routes = [
   {
     path: 'epldetails/:id',
     loadChildren: () => import('./pages/epldetails/epldetails.module').then( m => m.EpldetailsPageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'geomaps',
+    loadChildren: () => import('./pages/geomaps/geomaps.module').then( m => m.GeomapsPageModule)
   }
 ];
 

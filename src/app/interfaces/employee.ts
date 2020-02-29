@@ -6,4 +6,5 @@ export interface Employee {
     createdAt?: number;
     picture?: string;
     salario?:number;
+    funcao?:string;
 }

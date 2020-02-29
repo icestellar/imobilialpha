@@ -16,7 +16,7 @@ export class EpldetailsPage implements OnInit {
   public employee: Employee = {};
   private loading: any;
   private employeeSubscription: Subscription;
-
+  
   constructor(
     private employeeService: EmployeeService,
     private activatedRoute: ActivatedRoute,

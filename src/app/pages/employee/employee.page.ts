@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingController, ToastController } from '@ionic/angular';
+import 'firebase/database';
+import { AngularFirestore } from '@angular/fire/firestore';
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.page.html',
@@ -18,14 +20,17 @@ export class EmployeePage implements OnInit {
     private authService: AuthService,
     private loadingCtrl: LoadingController,
     private productService: EmployeeService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private db : AngularFirestore
   ) {
     this.employeesSubscription = this.productService.getEmployees().subscribe(data => {
       this.employees = data;
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.db.collection('employee').valueChanges().subscribe(val => console.log(val))
+  }
 
   ngOnDestroy() {
     this.employeesSubscription.unsubscribe();
@@ -60,4 +65,5 @@ export class EmployeePage implements OnInit {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
   }
+  
 }

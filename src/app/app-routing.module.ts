@@ -43,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: 'geomaps',
-    loadChildren: () => import('./pages/geomaps/geomaps.module').then( m => m.GeomapsPageModule)
+    loadChildren: () => import('./pages/geomaps/geomaps.module').then( m => m.GeomapsPageModule), canActivate: [AuthGuard]
   }
 ];
 

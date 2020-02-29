@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Map, tileLayer, marker } from 'leaflet';
-declare let L;
 
 @Component({
   selector: 'app-geo',
@@ -8,32 +7,39 @@ declare let L;
   styleUrls: ['./geo.page.scss'],
 })
 export class GeoPage implements OnInit {
-  map:Map;
-  newMarker: any;
-
+  map: Map;
+  propertyList = [];
 
   constructor() { }
+  
 
-  ngOnInit() {
-  }
+  ionViewDidEnter() {
+    this.map = new Map('mapId3').setView([42.35663, -71.1109], 16);
 
-  ionViewDidEnter() { this.leafletMap(); }
-
-  leafletMap() {
-    // In setView add latLng and zoom
-    this.map = new Map('mapId').setView([28.644800, 77.216721], 10);
-    tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'edupala.com © ionic LeafLet',
+    tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+      attribution: 'edupala.com'
     }).addTo(this.map);
 
-
-    marker([28.6, 77]).addTo(this.map)
-      .bindPopup('Ionic 4 <br> Leaflet.')
-      .openPopup();
+    fetch('./assets/data.json').then(res => res.json())
+    .then(json => {
+      this.propertyList = json.properties;
+      this.leafletMap();
+    });
+    console.log('www/assets/data.json')
   }
 
-  /** Remove map when we have multiple map object */
+  leafletMap() {
+    for (const property of this.propertyList) {
+      marker([property.lat, property.long]).addTo(this.map)
+        .bindPopup(property.city)
+        .openPopup();
+    }
+  }
+
   ionViewWillLeave() {
     this.map.remove();
+  }
+  ngOnInit(){
+
   }
 }

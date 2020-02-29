@@ -47,8 +47,17 @@ const routes: Routes = [
   },
   {
     path: 'galery',
-    loadChildren: () => import('./pages/galery/galery.module').then( m => m.GaleryPageModule)
-  }
+    loadChildren: () => import('./pages/galery/galery.module').then( m => m.GaleryPageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'audit',
+    loadChildren: () => import('./pages/audit/audit.module').then( m => m.AuditPageModule),  canActivate: [AuthGuard]
+  },
+  {
+    path: 'dtldetails',
+    loadChildren: () => import('./pages/dtldetails/dtldetails.module').then( m => m.DtldetailsPageModule)
+  },
+  
 ];
 
 @NgModule({

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Auditorias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="audit.local" placeholder="Nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="audit.nome" placeholder="Endereço"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="audit.picture" placeholder="Foto"></ion-input>
+  </ion-item>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="saveAudit()" expand="block">
+      Salvar Auditoria
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

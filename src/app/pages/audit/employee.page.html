@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Auditores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="!employees.length">
+    <ion-item *ngFor="let item of [0, 1]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let employee of employees">
+      <ion-item button [routerLink]="['/epldetails', employee.id]">
+        <ion-avatar slot="start">
+          <img [src]="employee.picture">
+        </ion-avatar>
+
+        <ion-label>
+          <!--Colocar foto :) -->
+          {{ employee.name }}
+          <p>{{ employee.cpf}}</p>
+          <p>{{ employee.createdAt | date: 'short' }}</p>
+        </ion-label>
+
+        <ion-note color="primary" slot="end" *ngIf="employee.price">{{ employee.salario | currency: 'BRL' }} p/hora</ion-note>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteProduct(employee.id)">
+          <ion-icon slot="top" name="trash"></ion-icon>
+          Excluir
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button (click)="logout()" color="danger" expand="block">
+            Sair
+          </ion-button>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-button routerLink="/epldetails" expand="block">
+            Adc. Funcionário
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

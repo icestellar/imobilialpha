@@ -44,6 +44,10 @@ const routes: Routes = [
   {
     path: 'geomaps',
     loadChildren: () => import('./pages/geomaps/geomaps.module').then( m => m.GeomapsPageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'galery',
+    loadChildren: () => import('./pages/galery/galery.module').then( m => m.GaleryPageModule)
   }
 ];
 

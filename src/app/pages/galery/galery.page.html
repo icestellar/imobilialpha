@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Galeria de fotos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-buttom (click)="openGalery()" expand = "block">Escolha a foto</ion-buttom>
+  <ion-item>
+    <ion-label> Progresso {{uploadPercent | async }}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label class="ion-text-wrap">Url: {{downloadUrl | async}}</ion-label>
+    <img [scr] = "downloadUrl | async" *ngIf="downloadUrl | async">
+  </ion-item>
+</ion-content>

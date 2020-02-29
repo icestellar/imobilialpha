@@ -15,6 +15,9 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,7 +30,9 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     Geolocation,
     GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
-    Keyboard
+    Keyboard,
+    Camera,
+    File
   ],
   bootstrap: [AppComponent]
 })

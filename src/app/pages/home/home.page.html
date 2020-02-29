@@ -1,11 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>home</ion-title>
+    <ion-title>Imobiliaria</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-text>
-  AQUI DEVEM FICAR OS BOTOES :)
-</ion-text>
+  <ion-card class="welcome-card">
+    <img src="/assets/1.png" alt="" />
+    <ion-card-header>
+    </ion-card-header>
+      <div class="w3-center">
+    <ion-card-title><b>Imobiliariα</b></ion-card-title> 
+  </div>
+  <ion-card-content>
+    <div style="width: 100%; text-align: justify;">
+     <p class="p-conteudo">
+       Uma Imobiliaria completa!<br>
+       Veja nos botões abaixo os serviçõs disponíveis para a parte administrativa!
+    </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-button fill="clear" expand="block" color="danger" (click)="goApartment()"><ion-icon name="alert" size="small"></ion-icon>Gerenciar Apartamentos</ion-button>
 </ion-content>

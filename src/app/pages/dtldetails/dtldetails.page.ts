@@ -5,6 +5,13 @@ import { Audit } from 'src/app/interfaces/audit';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
+import { Camera , CameraOptions} from '@ionic-native/camera/ngx';
+import { Platform } from '@ionic/angular';
+import { File } from '@ionic-native/file/ngx';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-dtldetails',
@@ -17,6 +24,8 @@ export class DtldetailsPage implements OnInit {
   public audit: Audit = {};
   private loading: any;
   private auditSubscription: Subscription;
+  public uploadPercent : Observable<number>;
+  public downloadUrl: Observable<string>;
   
   constructor(
     private auditService: AuditService,
@@ -24,7 +33,11 @@ export class DtldetailsPage implements OnInit {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private camera: Camera,
+    private platform: Platform,
+    private file: File,
+    private afStorage: AngularFireStorage
   ) {
     this.auditId = this.activatedRoute.snapshot.params['id'];
 
@@ -82,6 +95,44 @@ export class DtldetailsPage implements OnInit {
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
+  }
+  async openGalery(){
+    const options: CameraOptions ={
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      correctOrientation: true
+    };
+
+    try{
+      const fileUri: string = await this.camera.getPicture(options);
+      let file: string;
+      if(this.platform.is('ios')){
+        file = fileUri.split('/').pop();
+      }else{
+        file = fileUri.substring(fileUri.lastIndexOf('/') + 1, fileUri.lastIndexOf('?'));
+      }
+
+      const path: string = fileUri.substring(0, fileUri.lastIndexOf('/'));
+      const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path,file);
+      const blob: Blob = new Blob([buffer], {type: 'image/jpeg'});
+
+      this.uploadPicture(blob);
+
+    }catch(error)
+    {
+      console.error(error);
+    }
+  }
+  uploadPicture(blob: Blob){
+    const ref = this.afStorage.ref('ionic.jpg');
+    const task = ref.put(blob);
+
+    this.uploadPercent = task.percentageChanges();
+
+    task.snapshotChanges().pipe(
+      finalize(( ) => this.downloadUrl = ref.getDownloadURL())
+    ).subscribe();
   }
 
 }

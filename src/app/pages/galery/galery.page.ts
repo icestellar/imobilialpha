@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Camera, DestinationType ,CameraOptions} from '@ionic-native/camera/ngx';
+import { Camera , CameraOptions} from '@ionic-native/camera/ngx';
 import { Platform } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';

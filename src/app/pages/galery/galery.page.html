@@ -6,12 +6,12 @@
 
 <ion-content>
 
-  <ion-buttom (click)="openGalery()" expand = "block">Escolha a foto</ion-buttom>
+  <ion-button (click)="openGalery()" expand = "block">Escolha a foto</ion-button>
   <ion-item>
     <ion-label> Progresso {{uploadPercent | async }}</ion-label>
   </ion-item>
   <ion-item>
     <ion-label class="ion-text-wrap">Url: {{downloadUrl | async}}</ion-label>
-    <img [scr] = "downloadUrl | async" *ngIf="downloadUrl | async">
   </ion-item>
+  <img [src]= "downloadUrl | async" *ngIf="downloadUrl | async">
 </ion-content>

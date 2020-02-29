@@ -17,10 +17,15 @@
       <ion-input type="text" [(ngModel)]="audit.nome" placeholder="Endereço"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-item>
-    <ion-input type="text" [(ngModel)]="audit.picture" placeholder="Foto"></ion-input>
-  </ion-item>
   
+  <ion-button (click)="openGalery()" expand = "block">Escolha a foto</ion-button>
+  <ion-item>
+    <ion-label> Progresso {{uploadPercent | async }}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label class="ion-text-wrap">Url: {{downloadUrl | async}}</ion-label>
+    <img [src] = "downloadUrl | async" *ngIf="downloadUrl | async">
+  </ion-item>
 </ion-content>
 
 <ion-footer>

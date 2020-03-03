@@ -1,38 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/interfaces/employee';
+import { Audit } from 'src/app/interfaces/audit';
 import { Subscription } from 'rxjs';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { AuditService } from 'src/app/services/audit.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
+
+
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.page.html',
-  styleUrls: ['./employee.page.scss'],
+  selector: 'app-audit',
+  templateUrl: './audit.page.html',
+  styleUrls: ['./audit.page.scss'],
 })
-export class EmployeePage implements OnInit {
+export class AuditPage implements OnInit {
+
   private loading: any;
-  public employees = new Array<Employee>();
-  private employeesSubscription: Subscription;
+  public audits = new Array<Audit>();
+  private auditsSubscription: Subscription;
 
   constructor(
     private authService: AuthService,
     private loadingCtrl: LoadingController,
-    private productService: EmployeeService,
+    private productService: AuditService,
     private toastCtrl: ToastController,
     private db : AngularFirestore
   ) {
-    this.employeesSubscription = this.productService.getEmployees().subscribe(data => {
-      this.employees = data;
+    this.auditsSubscription = this.productService.getAudits().subscribe(data => {
+      this.audits = data;
     });
   }
 
   ngOnInit() { 
-    this.db.collection('employee').valueChanges().subscribe(val => console.log(val))
+    this.db.collection('audit').valueChanges().subscribe(val => console.log(val))
   }
 
   ngOnDestroy() {
-    this.employeesSubscription.unsubscribe();
+    this.auditsSubscription.unsubscribe();
   }
 
   async logout() {
@@ -54,7 +57,7 @@ export class EmployeePage implements OnInit {
 
   async deleteProduct(id: string) {
     try {
-      await this.productService.deleteEmployee(id);
+      await this.productService.deleteAudit(id);
     } catch (error) {
       this.presentToast('Erro ao tentar deletar');
     }
@@ -64,5 +67,5 @@ export class EmployeePage implements OnInit {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
   }
-  
+
 }

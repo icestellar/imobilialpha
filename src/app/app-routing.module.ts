@@ -50,16 +50,20 @@ const routes: Routes = [
     loadChildren: () => import('./pages/galery/galery.module').then( m => m.GaleryPageModule), canActivate: [AuthGuard]
   },
   {
-    path: 'audit',
-    loadChildren: () => import('./pages/audit/audit.module').then( m => m.AuditPageModule),  canActivate: [AuthGuard]
-  },
-  {
-    path: 'dtldetails',
-    loadChildren: () => import('./pages/dtldetails/dtldetails.module').then( m => m.DtldetailsPageModule)
-  },
-  {
     path: 'geo1',
-    loadChildren: () => import('./pages/geo1/geo1.module').then( m => m.Geo1PageModule)
+    loadChildren: () => import('./pages/geo1/geo1.module').then( m => m.Geo1PageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'audit',
+    loadChildren: () => import('./pages/audit/audit.module').then( m => m.AuditPageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'auditdtl',
+    loadChildren: () => import('./pages/auditdtl/auditdtl.module').then( m => m.AuditdtlPageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'auditdtl/:id',
+    loadChildren: () => import('./pages/auditdtl/auditdtl.module').then( m => m.AuditdtlPageModule), canActivate: [AuthGuard]
   },
   
 ];

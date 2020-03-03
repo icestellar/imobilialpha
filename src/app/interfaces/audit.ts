@@ -1,7 +1,9 @@
 export interface Audit {
     createdAt?: number;
-    local?: string;
+    local?:string;
     name?: string;
     picure?: string;
     userId?: string;
+    longitude?: number;
+    latitude?: number;
 }

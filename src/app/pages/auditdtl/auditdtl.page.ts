@@ -56,8 +56,9 @@ export class AuditdtlPage implements OnInit {
       this.audit.longitude = this.longitude;
       this.audit.latitude = this.latitude;
       marker([this.latitude, this.longitude]).addTo(this.map)
-      .bindPopup('Boo')
+      .bindPopup('Aqui!')
       .openPopup();
+      this.map.setView([this.latitude, this.longitude],23)
      }).catch((error) => {
        console.log('Error getting location', error);
      });

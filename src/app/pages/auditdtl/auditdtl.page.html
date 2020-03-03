@@ -11,21 +11,48 @@
 <ion-content class="ion-padding">
   <ion-list>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="audit.name" placeholder="Nome"></ion-input>
+      <ion-input type="text" [(ngModel)]="audit.local" placeholder="Local"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="audit.endereco" placeholder="Endereço"></ion-input>
+      <ion-input type="text" [(ngModel)]="audit.nome" placeholder="Nome"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="audit.cpf" placeholder="CPF"></ion-input>
+      <ion-input type="text" [(ngModel)]="audit.longitude" placeholder="Longitude"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="audit.salario" placeholder="Valor/hora (em h)"></ion-input>
+      <ion-input type="text" [(ngModel)]="audit.latitude" placeholder="Latitue"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-item>
-    <ion-input type="text" [(ngModel)]="audit.picture" placeholder="Foto"></ion-input>
-  </ion-item>
+  <div class="ion-padding">
+
+    <ion-button (click)="getCurrentCoordinates()" expand="block">
+      Get Location
+    </ion-button>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Location Coordinates</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>
+        Latitue
+      </ion-label>
+      <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Longitude
+      </ion-label>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="longitude" placeholder="Nome"></ion-input>
+      <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
+      </ion-item>
+    </ion-item>
+    </ion-list>    
+  </div>
+  <div id="mapId3" style="height: 30%; width: 100%;">
+
+  </div>
   
 </ion-content>
 

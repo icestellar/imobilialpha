@@ -15,4 +15,26 @@ export class HomePage implements OnInit {
   goApartment(){
     this.router.navigate(['/apartment'])
   }
+
+  goGalery(){
+    this.router.navigate(['/galery'])
+  }
+
+  goEmployee(){
+    this.router.navigate(['/employee'])
+  }
+
+  goAudit(){
+    this.router.navigate(['/audit'])
+  }
+
+
+  goGeo(){
+    this.router.navigate(['/geo'])
+  }
+
+  goGeomaps(){
+    this.router.navigate(['/geomaps'])
+  }
+
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, LoadingController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -19,6 +19,7 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private loadingController: LoadingController,
     private toastController: ToastController,
+    public keyboard: Keyboard
     
   ) { }
 

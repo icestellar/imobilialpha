@@ -57,6 +57,10 @@ const routes: Routes = [
     path: 'dtldetails',
     loadChildren: () => import('./pages/dtldetails/dtldetails.module').then( m => m.DtldetailsPageModule)
   },
+  {
+    path: 'geo1',
+    loadChildren: () => import('./pages/geo1/geo1.module').then( m => m.Geo1PageModule)
+  },
   
 ];
 

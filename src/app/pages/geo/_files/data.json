@@ -1,0 +1,16 @@
+{
+    "properties" : [
+    {
+        "city": "Cuaiba",
+        "state" : "MT",
+        "long": -71.10858,
+        "lat": 42.35963
+    },
+    {
+        "city": "Sao Paulo",
+        "state": "SP",
+        "long": -71.10869,
+        "lat": 42.359103
+    }
+    ]
+ }

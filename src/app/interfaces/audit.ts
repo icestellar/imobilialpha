@@ -6,4 +6,5 @@ export interface Audit {
     userId?: string;
     longitude?: number;
     latitude?: number;
+    valor?: number;
 }

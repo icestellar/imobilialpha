@@ -34,11 +34,11 @@
         <ion-label>
           <!--Colocar foto :) -->
           {{ audit.name }}
-          <p>{{ audit.cpf}}</p>
+          <p>{{ audit.local}}</p>
           <p>{{ audit.createdAt | date: 'short' }}</p>
         </ion-label>
 
-        <ion-note color="primary" slot="end" *ngIf="audit.price">{{ audit.salario | currency: 'BRL' }} p/hora</ion-note>
+        <ion-note color="primary" slot="end" *ngIf="audit.price">{{ audit.valor | currency: 'BRL' }} p/hora</ion-note>
       </ion-item>
       <ion-item-options side="end">
         <ion-item-option color="danger" (click)="deleteProduct(audit.id)">

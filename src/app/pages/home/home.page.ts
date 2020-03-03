@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   }
 
   goGalery(){
-    this.router.navigate(['/galery'])
+    this.router.navigate(['/upth'])
   }
 
   goEmployee(){
@@ -27,14 +27,4 @@ export class HomePage implements OnInit {
   goAudit(){
     this.router.navigate(['/audit'])
   }
-
-
-  goGeo(){
-    this.router.navigate(['/geo'])
-  }
-
-  goGeomaps(){
-    this.router.navigate(['/geomaps'])
-  }
-
 }

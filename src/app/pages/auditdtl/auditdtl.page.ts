@@ -7,6 +7,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
 import { Map, tileLayer, marker} from 'leaflet';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+ 
 
 @Component({
   selector: 'app-auditdtl',
@@ -23,6 +26,8 @@ export class AuditdtlPage implements OnInit {
   map: Map;
   lat: any = -15;
   long: any = -15;
+  locationCoords: any;
+  timetest: any;
 
   constructor(
     private auditService: AuditService,
@@ -31,14 +36,23 @@ export class AuditdtlPage implements OnInit {
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private toastCtrl: ToastController,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private androidPermissions: AndroidPermissions,
+    private locationAccuracy: LocationAccuracy
   ) {
+    this.locationCoords = {
+      latitude: "",
+      longitude: "",
+      accuracy: "",
+      timestamp: ""
+    }
+    this.timetest = Date.now();
     this.auditId = this.activatedRoute.snapshot.params['id'];
 
     if (this.auditId) this.loadAudit();
   }
   options = {
-    timeout: 10000, 
+    timeout: 30000, 
     enableHighAccuracy: true, 
     maximumAge: 3600
   };
@@ -47,8 +61,57 @@ export class AuditdtlPage implements OnInit {
   ngOnDestroy() {
     if (this.auditSubscription) this.auditSubscription.unsubscribe();
   }
+  checkGPSPermission() {
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+      result => {
+        if (result.hasPermission) {
+ 
+          //If having permission show 'Turn On GPS' dialogue
+          this.askToTurnOnGPS();
+        } else {
+ 
+          //If not having permission ask for permission
+          this.requestGPSPermission();
+        }
+      },
+      err => {
+        alert(err);
+      }
+    );
+  }
+ 
+  requestGPSPermission() {
+    this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+      if (canRequest) {
+        console.log("4");
+      } else {
+        //Show 'GPS Permission Request' dialogue
+        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+          .then(
+            () => {
+              // call method to turn on GPS
+              this.askToTurnOnGPS();
+            },
+            error => {
+              //Show alert if user click on 'No Thanks'
+              alert('requestPermission Error requesting location permissions ' + error)
+            }
+          );
+      }
+    });
+  }
+ 
+  askToTurnOnGPS() {
+    this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+      () => {
+        // When GPS Turned ON call method to get Accurate location coordinates
+        this.getCurrentCoordinates()
+      },
+      error => alert('Error requesting location permissions ' + JSON.stringify(error))
+    );
+  }
   getCurrentCoordinates() {
-    this.geolocation.getCurrentPosition().then((resp) => {
+    this.geolocation.getCurrentPosition({ timeout: 30000 }).then((resp) => {
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
       this.lat = this.latitude;
@@ -121,5 +184,6 @@ export class AuditdtlPage implements OnInit {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
   }
+  
 
 }

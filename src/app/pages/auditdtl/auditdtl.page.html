@@ -17,39 +17,17 @@
       <ion-input type="text" [(ngModel)]="audit.nome" placeholder="Nome"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="audit.longitude" placeholder="Longitude"></ion-input>
+      <ion-input type="text" [(ngModel)]="audit.longitude" placeholder="Longitude" disabled></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="audit.latitude" placeholder="Latitue"></ion-input>
+      <ion-input type="text" [(ngModel)]="audit.latitude" placeholder="Latitue" disabled></ion-input>
     </ion-item>
   </ion-list>
   <div class="ion-padding">
 
-    <ion-button (click)="getCurrentCoordinates()" expand="block">
-      Get Location
+    <ion-button fill="clear" expand="block" color="danger" (click)="getCurrentCoordinates()">
+      <ion-icon name="location-outline" size="small"></ion-icon>Localização atual
     </ion-button>
-
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Location Coordinates</ion-label>
-    </ion-list-header>
-    <ion-item>
-      <ion-label>
-        Latitue
-      </ion-label>
-      <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        Longitude
-      </ion-label>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="longitude" placeholder="Nome"></ion-input>
-      <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
-      </ion-item>
-    </ion-item>
-    </ion-list>    
-  </div>
   <div id="mapId3" style="height: 30%; width: 100%;">
 
   </div>
@@ -59,7 +37,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-button (click)="saveAudit()" expand="block">
-      Salvar Auditor
+      Salvar Auditoria
     </ion-button>
   </ion-toolbar>
 </ion-footer>

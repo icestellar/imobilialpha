@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GeomapsPageRoutingModule } from './geomaps-routing.module';
+import { UpthPageRoutingModule } from './upth-routing.module';
 
-import { GeomapsPage } from './geomaps.page';
+import { UpthPage } from './upth.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GeomapsPageRoutingModule
+    UpthPageRoutingModule
   ],
-  declarations: [GeomapsPage]
+  declarations: [UpthPage]
 })
-export class GeomapsPageModule {}
+export class UpthPageModule {}
